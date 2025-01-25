@@ -29,7 +29,7 @@ Things you may want to cover:
 |---------------------|-----------|--------------------------|
 | nickname            | string    | null:false               |
 | email               | string    | null:false, unique: true |
-| password            | string    | null:false               |
+| encrypted_password  | string    | null:false               |
 | last_name           | string    | null:false               |
 | first_name          | string    | null:false               |
 | last_name_kana      | string    | null:false               |
@@ -39,24 +39,22 @@ Things you may want to cover:
 
 ### Association
 has_many :items
-has_many :orders
-belongs_to :purchase_record
+has_many :purchase_record
 
 ---
 
 ## itemsテーブル
-| Column                   | Type      | Options                      |
-|--------------------------|-----------|------------------------------|
-| item_name                | string    | null:false                   |
-| item_info                | text      | null:false                   |
-| item_category            | integer   | null:false                   |
-| item-sales-status        | integer   | null:false                   |
-| item_shipping_fee_status | integer   | null:false                   |
-| item_prefecture          | integer   | null:false                   |
-| item_shipping_fee_status | integer   | null:false                   |
-| item_scheduled_delivery  | integer   | null:false                   |
-| item_price               | integer   | null:false                   |
-| user_id                  | references| null:false, foreign_key: true|
+| Column                      | Type      | Options                      |
+|-----------------------------|-----------|------------------------------|
+| item_name                   | string    | null:false                   |
+| item_info                   | text      | null:false                   |
+| item_category_id            | integer   | null:false                   |
+| item_sales_status_id        | integer   | null:false                   |
+| item_shipping_fee_status_id | integer   | null:false                   |
+| item_prefecture_id          | integer   | null:false                   |
+| item_scheduled_delivery_id  | integer   | null:false                   |
+| item_price                  | integer   | null:false                   |
+| user                        | references| null:false, foreign_key: true|
 
 ※ 画像はActiveStorageで実装するため含まない。
 
@@ -78,19 +76,21 @@ belongs_to :purchase_record
 
 
 ### Association
-belongs_to :item
+belongs_to :purchase_record
 
 ---
 
 ## purchase_recordテーブル
 | Column              | Type      | Options                          |
 |---------------------|-----------|----------------------------------|
-| user_id             | references| null:false, foreign_key: true    |
-| item_id             | references| null:false, foreign_key: true    |
+| user                | references| null:false, foreign_key: true    |
+| item                | references| null:false, foreign_key: true    |
+| order               | references| null:false, foreign_key: true    |
 
 
 ### Association
 belongs_to :user
-belongs_to :item
+has_many :items
+has_many :orders
 
 ---
