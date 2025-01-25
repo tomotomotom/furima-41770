@@ -40,6 +40,7 @@ Things you may want to cover:
 ### Association
 has_many :items
 has_many :purchase_record
+has_many :orders
 
 ---
 
@@ -60,23 +61,23 @@ has_many :purchase_record
 
 ### Association
 belongs_to :user
-belongs_to :purchase_record
 
 ---
 
 ## ordersテーブル
-| Column              | Type      | Options                  |
-|---------------------|-----------|--------------------------|
-| postal_code         | integer   | null:false               |
-| item_prefecture     | integer   | null:false               |
-| city                | string    | null:false               |
-| addresses           | string    | null:false               |
-| building            | string    |                          |
-| phone_number        | string    | null:false               |
+| Column              | Type      | Options                          |
+|---------------------|-----------|----------------------------------|
+| postal_code         | string    | null:false                       |
+| item_prefecture_id  | integer   | null:false                       |
+| city                | string    | null:false                       |
+| addresses           | string    | null:false                       |
+| building            | string    |                                  |
+| phone_number        | string    | null:false                       |
+| purchase_record     | references| null:false, foreign_key: true    |
 
 
 ### Association
-belongs_to :purchase_record
+belongs_to :user
 
 ---
 
@@ -90,7 +91,5 @@ belongs_to :purchase_record
 
 ### Association
 belongs_to :user
-has_many :items
-has_many :orders
 
 ---
