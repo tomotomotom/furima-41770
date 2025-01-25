@@ -25,53 +25,56 @@ Things you may want to cover:
 
 
 ## usersテーブル
-| カラム名             | 型        | 制約                     |
-|----------------------|-----------|--------------------------|
-| nickname            | string    | NOT NULL                |
-| email               | string    | NOT NULL, ユニーク制約   |
-| password            | string    | NOT NULL                |
-| last_name           | string    | NOT NULL                |
-| first_name          | string    | NOT NULL                |
-| last_name_kana      | string    | NOT NULL                |
-| first_name_kana     | string    | NOT NULL                |
-| birth_date          | string    | NOT NULL                |
+| Column              | Type      | Options                  |
+|---------------------|-----------|--------------------------|
+| nickname            | string    | null:false               |
+| email               | string    | null:false, unique: true |
+| password            | string    | null:false               |
+| last_name           | string    | null:false               |
+| first_name          | string    | null:false               |
+| last_name_kana      | string    | null:false               |
+| first_name_kana     | string    | null:false               |
+| birth_date          | date      | null:false               |
 
 
 ### Association
 has_many :items
 has_many :orders
+belongs_to :purchase_record
 
 ---
 
 ## itemsテーブル
-| カラム名             | 型        | 制約                     |
-|----------------------|-----------|--------------------------|
-| item_name           | string    | NOT NULL                |
-| item_info           | text      | NOT NULL                |
-| item_category       | string    | NOT NULL                |
-| item-sales-status   | string    | NOT NULL                |
-| item_shipping_fee_status | string  | NOT NULL             |
-| item_prefecture     | string    | NOT NULL                |
-| item_shipping_fee_status | string  | NOT NULL             |
-| item_scheduled_delivery  | string  | NOT NULL             |
-| item_price               | string  | NOT NULL             |
+| Column                   | Type      | Options                      |
+|--------------------------|-----------|------------------------------|
+| item_name                | string    | null:false                   |
+| item_info                | text      | null:false                   |
+| item_category            | integer   | null:false                   |
+| item-sales-status        | integer   | null:false                   |
+| item_shipping_fee_status | integer   | null:false                   |
+| item_prefecture          | integer   | null:false                   |
+| item_shipping_fee_status | integer   | null:false                   |
+| item_scheduled_delivery  | integer   | null:false                   |
+| item_price               | integer   | null:false                   |
+| user_id                  | references| null:false, foreign_key: true|
 
 ※ 画像はActiveStorageで実装するため含まない。
 
 ### Association
 belongs_to :user
+belongs_to :purchase_record
 
 ---
 
 ## ordersテーブル
-| カラム名             | 型        | 制約                     |
-|----------------------|-----------|--------------------------|
-| postal_code         | string    | NOT NULL               |
-| prefecture          | string    | NOT NULL               |
-| city                | string    | NOT NULL               |
-| addresses           | string    | NOT NULL               |
-| building            | string    | NOT NULL               |
-| phone_number        | string    | NOT NULL               |
+| Column              | Type      | Options                  |
+|---------------------|-----------|--------------------------|
+| postal_code         | integer   | null:false               |
+| item_prefecture     | integer   | null:false               |
+| city                | string    | null:false               |
+| addresses           | string    | null:false               |
+| building            | string    |                          |
+| phone_number        | string    | null:false               |
 
 
 ### Association
@@ -80,10 +83,10 @@ belongs_to :item
 ---
 
 ## purchase_recordテーブル
-| カラム名             | 型        | 制約                     |
-|----------------------|-----------|--------------------------|
-| user_id             | references| NOT NULL, 外部キー      |
-| item_id             | references| NOT NULL, 外部キー      |
+| Column              | Type      | Options                          |
+|---------------------|-----------|----------------------------------|
+| user_id             | references| null:false, foreign_key: true    |
+| item_id             | references| null:false, foreign_key: true    |
 
 
 ### Association
