@@ -39,8 +39,8 @@ Things you may want to cover:
 
 ### Association
 has_many :items
-has_many :purchase_record
 has_many :orders
+has_many :purchase_records
 
 ---
 
@@ -61,6 +61,7 @@ has_many :orders
 
 ### Association
 belongs_to :user
+has_many :purchase_records
 
 ---
 
@@ -73,7 +74,7 @@ belongs_to :user
 | addresses           | string    | null:false                       |
 | building            | string    |                                  |
 | phone_number        | string    | null:false                       |
-| purchase_record     | references| null:false, foreign_key: true    |
+| user                | references| null:false, foreign_key: true    |
 
 
 ### Association
@@ -81,15 +82,15 @@ belongs_to :user
 
 ---
 
-## purchase_recordテーブル
+## purchase_recordsテーブル
 | Column              | Type      | Options                          |
 |---------------------|-----------|----------------------------------|
 | user                | references| null:false, foreign_key: true    |
 | item                | references| null:false, foreign_key: true    |
-| order               | references| null:false, foreign_key: true    |
 
 
 ### Association
 belongs_to :user
+belongs_to :item
 
 ---
