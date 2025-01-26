@@ -39,7 +39,6 @@ Things you may want to cover:
 
 ### Association
 has_many :items
-has_many :orders
 has_many :purchase_records
 
 ---
@@ -61,7 +60,7 @@ has_many :purchase_records
 
 ### Association
 belongs_to :user
-has_many :purchase_records
+has_one_attached :purchase_record
 
 ---
 
@@ -74,11 +73,11 @@ has_many :purchase_records
 | addresses           | string    | null:false                       |
 | building            | string    |                                  |
 | phone_number        | string    | null:false                       |
-| user                | references| null:false, foreign_key: true    |
+| purchase_record     | references| null:false, foreign_key: true    |
 
 
 ### Association
-belongs_to :user
+has_one_attached :purchase_record
 
 ---
 
@@ -92,5 +91,6 @@ belongs_to :user
 ### Association
 belongs_to :user
 belongs_to :item
+belongs_to :order
 
 ---
