@@ -60,7 +60,7 @@ has_many :purchase_records
 
 ### Association
 belongs_to :user
-has_one_attached :purchase_record
+has_one :purchase_record
 
 ---
 
@@ -77,7 +77,7 @@ has_one_attached :purchase_record
 
 
 ### Association
-has_one_attached :purchase_record
+belongs_to :purchase_record
 
 ---
 
@@ -91,6 +91,6 @@ has_one_attached :purchase_record
 ### Association
 belongs_to :user
 belongs_to :item
-belongs_to :order
+has_one :order
 
 ---
