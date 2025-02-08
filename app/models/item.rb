@@ -17,7 +17,7 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :info
-    validates :price,format: {with: /\A([3-9]\d{2}|[1-9]\d{3,6}|[1-9]\d{0,2}(,\d{3}){1,2})\z/, message: "is invalid. Please enter a valid price between ¥300 and ¥9,999,999 with a yen symbol and only half-width numbers."}
+    validates :price,numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999} 
     validates :image
 
   end
