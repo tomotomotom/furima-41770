@@ -3,8 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :items
 
-         with_options presence: true do
+  with_options presence: true do
          validates :nickname
          # ひらがな、カタカナ、漢字のみ許可する
          validates :first_name,format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
@@ -17,6 +18,6 @@ class User < ApplicationRecord
          validates :birth_date
          # 半角英字数字混合のみ許可する
          validates :password,format: {with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: "is invalid. Input half-width characters."}
-         end
+   end
 
 end
