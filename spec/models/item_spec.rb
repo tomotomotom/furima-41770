@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @user = FactoryBot.build(:user)
     @item = FactoryBot.build(:item)
   end
 
@@ -26,31 +25,37 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Info can't be blank")
     end
 
+    it '商品のカテゴリーがーーーでは出品できない' do
+      @item.category_id = '1'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Category can't be blank")
+    end
+
     it '商品の状態がーーーでは出品できない' do
       @item.sales_status_id = '1'
       @item.valid?
       expect(@item.errors.full_messages).to include("Sales status can't be blank")
     end
 
-    it '配送料の状態がーーーでは出品できない' do
+    it '配送料がーーーでは出品できない' do
       @item.shipping_fee_id = '1'
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
     end
 
-    it '発送元の状態がーーーでは出品できない' do
+    it '発送元がーーーでは出品できない' do
       @item.prefecture_id = '1'
       @item.valid?
       expect(@item.errors.full_messages).to include("Prefecture can't be blank")
     end
 
-    it '発送時期の状態がーーーでは出品できない' do
+    it '発送時期がーーーでは出品できない' do
       @item.scheduled_delivery_id = '1'
       @item.valid?
       expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
     end
 
-    it '商品価格の状態が空欄では出品できない' do
+    it '商品価格が空欄では出品できない' do
       @item.price = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank")
@@ -79,6 +84,13 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Image can't be blank")
     end
+
+    it 'ユーザーが紐づいていないと出品できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("User must exist")
+    end
+
   end
 end
 end
