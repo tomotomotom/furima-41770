@@ -1,10 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :create]
-  # before_action :set_item, only: [:index, :create]
+  before_action :set_item, only: [:index,:new, :create]
 
 
   def index
-    @item = Item.find(params[:item_id])
   end
 
   def create
@@ -28,8 +27,8 @@ class OrdersController < ApplicationController
       ).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
-  # def set_item
-  #   @item = Item.find(params[:item_id])
-  # end
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
 end
