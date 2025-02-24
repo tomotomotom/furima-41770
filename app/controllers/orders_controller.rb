@@ -1,16 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :create]
-  before_action :set_item, only: [:index, :create]
+  before_action :set_item, only: [:index,:new, :create]
 
 
   def index
-    @order_form = OrderForm.new
   end
 
   def create
-    @order_form = OrderForm.new(order_params)
-    if @order_form.valid?
-      @order_form.save
+    @order = Order.create(order_params)
+    if @order.save
       redirect_to root_path
     else
       render :index, status: :unprocessable_entity
@@ -19,7 +17,7 @@ class OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order_form).permit(
+    params.require(:order).permit(
       :postal_code,
       :prefecture_id,
       :city,
