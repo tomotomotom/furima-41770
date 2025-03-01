@@ -31,11 +31,10 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%# <%= render 'shared/error_messages', model: f.object %> 
-
     <script type="text/javascript" src="https://js.pay.jp/v2/pay.js"></script>
     
-    <%= form_with model:@order, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= form_with model:@order_form, url:item_orders_path(@item),  id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= render 'shared/error_messages', model: f.object %> 
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
