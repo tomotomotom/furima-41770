@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
   end
 
   private
+
   def order_params
     params.require(:order_form).permit(
       :postal_code,
@@ -35,5 +36,4 @@ class OrdersController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
-
 end
