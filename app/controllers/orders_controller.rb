@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [ :index,:new, :create]
   before_action :set_item, only: [:index,:new, :create]
-
+  before_action :redirect_if_purchased, only: [:index, :new, :create]
+  before_action :redirect_if_owner, only: [:index, :new, :create]
 
   def index
     @order_form = OrderForm.new
@@ -35,5 +36,15 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def redirect_if_purchased
+    if @item.purchase_record.present?
+      redirect_to root_path
+    end
+  end
+
+  def redirect_if_owner
+    redirect_to root_path if @item.user_id == current_user.id
   end
 end
