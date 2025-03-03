@@ -13,14 +13,21 @@ class OrdersController < ApplicationController
     @order_form = OrderForm.new(order_params)
     if @order_form.valid?
       pay_item
-       @order_form.save
-      redirect_to root_path
+      if @order_form.save
+        redirect_to root_path
+      else
+        Rails.logger.info("OrderForm save failed")
+        Rails.logger.info(@order_form.errors.full_messages)  # エラーメッセージをログに出力
+        render :index, status: :unprocessable_entity
+      end
     else
+      Rails.logger.info("OrderForm validation failed")
+      Rails.logger.info(@order_form.errors.full_messages)  # エラーメッセージをログに出力
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
     end
   end
-
+  
   private
 
   def order_params
@@ -30,8 +37,9 @@ class OrdersController < ApplicationController
       :city,
       :addresses,
       :building,
-      :phone_number
-      ).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
+      :phone_number,
+      :token
+      ).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
   def set_item
