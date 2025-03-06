@@ -5,25 +5,18 @@ class OrdersController < ApplicationController
   before_action :redirect_if_owner, only: [:index, :create]
 
   def index
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_form = OrderForm.new
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
   end
 
   def create
     @order_form = OrderForm.new(order_params)
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     if @order_form.valid?
       pay_item
-      if @order_form.save
-        redirect_to root_path
-      else
-        Rails.logger.info("OrderForm save failed")
-        Rails.logger.info(@order_form.errors.full_messages)  # エラーメッセージをログに出力
-        render :index, status: :unprocessable_entity
-      end
+      @order_form.save
+      redirect_to root_path
     else
-      Rails.logger.info("OrderForm validation failed")
-      Rails.logger.info(@order_form.errors.full_messages)  # エラーメッセージをログに出力
-      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
     end
   end

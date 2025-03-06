@@ -9,26 +9,25 @@ const pay = () => {
     numberElement.mount('#number-form');
     expiryElement.mount('#expiry-form');
     cvcElement.mount('#cvc-form');
-    const form = document.getElementById('charge-form')
 
+    const form = document.getElementById('charge-form')
     form.addEventListener("submit", (e) => {
+      e.preventDefault();
       payjp.createToken(numberElement).then(function (response) {
         if (response.error) {
-        }else{
-        const token = response.id;
-        const tokenObj = document.createElement('input');
-        tokenObj.setAttribute('type', 'hidden');
-        tokenObj.setAttribute('name', 'order_form[token]');
-        tokenObj.setAttribute('value', token);
-        renderDom.insertAdjacentHTML(tokenObj);
+        } else {
+          const token = response.id;
+          const renderDom = document.getElementById("charge-form");
+          const tokenObj = `<input value=${token} name='token' type="hidden">`;
+          renderDom.insertAdjacentHTML("beforeend", tokenObj);
         }
         numberElement.clear();
         expiryElement.clear();
         cvcElement.clear();
         document.getElementById("charge-form").submit();
-    });
-    e.preventDefault();
+     });
   });
 };
+
 window.addEventListener("turbo:load", pay);
 window.addEventListener("turbo:render", pay);
