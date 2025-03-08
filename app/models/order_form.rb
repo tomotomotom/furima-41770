@@ -36,11 +36,9 @@ class OrderForm
         purchase_record_id: purchase_record.id,
         user_id: user_id
       )
-      puts "Order created with purchase_record_id: #{purchase_record.id}"  # デバッグ情報
     end
     true
   rescue ActiveRecord::RecordInvalid => e
-    puts "Error: #{e.message}"  # デバッグ情報
     false
   end
 end
