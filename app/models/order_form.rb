@@ -1,7 +1,7 @@
 class OrderForm
   include ActiveModel::Model
 
-  attr_accessor :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :user_id, :item_id, :purchase_record_id,:token
+  attr_accessor :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :user_id, :item_id, :token
  
   with_options presence: true do
   validates :postal_code,format:  { with: /\A\d{3}-\d{4}\z/, message: 'は「000-0000」の形式で入力してください' }
