@@ -67,6 +67,7 @@ has_one :purchase_record
 ## ordersテーブル
 | Column              | Type      | Options                          |
 |---------------------|-----------|----------------------------------|
+| user                | references| null:false, foreign_key: true    |
 | postal_code         | string    | null:false                       |
 | item_prefecture_id  | integer   | null:false                       |
 | city                | string    | null:false                       |
