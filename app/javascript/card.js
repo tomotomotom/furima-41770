@@ -20,8 +20,8 @@ const pay = () => {
           const renderDom = document.getElementById("charge-form");
           const tokenObj = `<input value="${token}" name='token' type="hidden">`;
           renderDom.insertAdjacentHTML("beforeend", tokenObj);
-          document.getElementById("charge-form").submit();
         }
+        document.getElementById("charge-form").submit();
         numberElement.clear();
         expiryElement.clear();
         cvcElement.clear();
