@@ -75,7 +75,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '~> 1.2'
+  gem 'pg', '~> 1.3.5'
   gem 'unicorn', '6.1.0'
 end
 
