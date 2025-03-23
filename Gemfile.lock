@@ -394,6 +394,7 @@ DEPENDENCIES
   jbuilder
   mini_magick
   mysql2 (~> 0.5)
+  nokogiri
   payjp
   pg (~> 1.1.4)
   pry-rails

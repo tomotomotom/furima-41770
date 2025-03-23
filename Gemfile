@@ -54,10 +54,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.0'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'capistrano'
+  gem 'capistrano', require: false
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
-  gem 'capistrano-rails'
+  gem 'capistrano-rails', require: false
   gem 'capistrano3-unicorn'
 end
 
@@ -93,3 +93,4 @@ gem 'payjp'
 gem 'dotenv-rails'
 gem 'pry-rails'
 gem 'rack', '2.2.13'
+gem 'nokogiri', platforms: :ruby
