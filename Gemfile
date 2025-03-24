@@ -93,4 +93,4 @@ gem 'payjp'
 gem 'dotenv-rails'
 gem 'pry-rails'
 gem 'rack', '2.2.13'
-gem 'nokogiri', platforms: :ruby
+gem 'nokogiri', force_ruby_platform: true
