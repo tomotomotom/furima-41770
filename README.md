@@ -5,7 +5,7 @@
 ![MIT](https://img.shields.io/badge/License-MIT-brightgreen)
 ![Made with Ruby](https://img.shields.io/badge/Made%20with-Ruby-red)
 
-![furima_demo](https://user-images.githubusercontent.com/your-image-path/demo.gif)
+![トップページ](./top.jpg)
 
 ---
 
